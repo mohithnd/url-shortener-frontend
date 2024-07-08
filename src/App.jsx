@@ -33,8 +33,26 @@ function App() {
     setUrl("");
   };
 
+  const unsecureCopyToClipboard = (text) => {
+    const textArea = document.createElement("textarea");
+    textArea.value = text;
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    try {
+      document.execCommand("copy");
+    } catch (err) {
+      console.log("Unable To Copy To Clipboard: ", err);
+    }
+    document.body.removeChild(textArea);
+  };
+
   const handleCopy = () => {
-    navigator.clipboard.writeText(`${location}${shorten.shortId}`);
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(`${location}${shorten.shortId}`);
+    } else {
+      unsecureCopyToClipboard(`${location}${shorten.shortId}`);
+    }
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
