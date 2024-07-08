@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
+import { API_BASE_URL } from "../Config/ServerConfig";
 
 const Redirect = () => {
   const { id } = useParams();
@@ -9,7 +10,7 @@ const Redirect = () => {
   useEffect(() => {
     const fetchOriginal = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/url/${id}`);
+        const response = await axios.get(`${API_BASE_URL}/${id}`);
         if (response.data.success) {
           setStatus("valid");
           let url = response.data.url;

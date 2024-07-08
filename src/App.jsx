@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./App.css";
 import axios from "axios";
+import { API_BASE_URL } from "./Config/ServerConfig";
 
 function App() {
   const [url, setUrl] = useState("");
@@ -16,7 +17,7 @@ function App() {
     const body = JSON.stringify({ url });
     const config = {
       method: "post",
-      url: "http://localhost:3000/url/shorten",
+      url: `${API_BASE_URL}shorten`,
       headers: {
         "Content-Type": "application/json",
       },
