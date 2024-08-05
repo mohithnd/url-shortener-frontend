@@ -1,23 +1,13 @@
-import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Redirect from "./Pages/Redirect.jsx";
-
-const appRouter = createBrowserRouter([
-  {
-    path: "/",
-    element: <App />,
-  },
-  {
-    path: "/:id",
-    element: <Redirect />,
-  },
-]);
+import { BrowserRouter } from "react-router-dom";
+import { AuthProider } from "./Contexts/AuthContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <RouterProvider router={appRouter} />
-  </React.StrictMode>
+  <BrowserRouter>
+    <AuthProider>
+      <App />
+    </AuthProider>
+  </BrowserRouter>
 );
